@@ -36,9 +36,9 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.DataBoundSetter;
 import org.kohsuke.stapler.QueryParameter;
 
-import shaded.com.google.common.base.Objects;
-import shaded.com.google.common.base.Strings;
-import shaded.com.google.common.collect.ImmutableList;
+import com.google.common.base.Objects;
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 
 import javax.ws.rs.ProcessingException;
 

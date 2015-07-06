@@ -1,21 +1,20 @@
 package com.nirima.jenkins.plugins.docker.builder;
 
 import com.github.dockerjava.jaxrs.DockerCmdExecFactoryImpl;
-import shaded.com.google.common.base.Optional;
-import shaded.com.google.common.base.Splitter;
-import shaded.com.google.common.base.Throwables;
+import com.google.common.base.Optional;
+import com.google.common.base.Splitter;
+import com.google.common.base.Throwables;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.DockerException;
 
 import com.github.dockerjava.api.command.PushImageCmd;
 import com.github.dockerjava.api.model.Identifier;
-import com.github.dockerjava.core.DockerClientBuilder;
-import com.github.dockerjava.core.DockerClientConfig;
 import com.nirima.jenkins.plugins.docker.DockerSlave;
 import com.nirima.jenkins.plugins.docker.action.DockerBuildImageAction;
 import hudson.Extension;
 import hudson.FilePath;
+import hudson.FilePath.FileCallable;
 import hudson.Launcher;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
@@ -28,6 +27,7 @@ import hudson.tasks.Builder;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.jenkinsci.plugins.tokenmacro.TokenMacro;
+import org.jenkinsci.remoting.RoleChecker;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 import java.io.File;
@@ -133,9 +133,13 @@ public class DockerBuilderPublisher extends Builder implements Serializable {
         }
 
         private String buildImage() throws IOException, InterruptedException {
+          return fpChild.act(new FileCallable<String>() {
+              @Override
+              public void checkRoles(RoleChecker roleChecker) throws SecurityException {
 
-          return fpChild.act(new FilePath.FileCallable<String>() {
-                public String invoke(File f, VirtualChannel channel) throws IOException, InterruptedException {
+              }
+
+              public String invoke(File f, VirtualChannel channel) throws IOException, InterruptedException {
                     try {
                       listener.getLogger().println("Docker Build : build with tag " + tagToUse + " at path " + f.getAbsolutePath());
 
