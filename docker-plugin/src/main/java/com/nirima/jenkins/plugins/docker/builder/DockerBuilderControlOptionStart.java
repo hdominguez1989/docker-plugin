@@ -4,6 +4,7 @@ import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.DockerException;
 import hudson.Extension;
 import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
@@ -17,7 +18,7 @@ public class DockerBuilderControlOptionStart extends DockerBuilderControlOptionS
     }
 
     @Override
-    public void execute(AbstractBuild<?, ?> build) throws DockerException {
+    public void execute(Run<?, ?> build) throws DockerException {
 
         LOGGER.info("Starting container " + containerId);
         DockerClient client = getClient(build);

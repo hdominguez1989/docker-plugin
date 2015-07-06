@@ -1,5 +1,6 @@
 package com.nirima.jenkins.plugins.docker.builder;
 
+import hudson.model.Run;
 import shaded.com.google.common.base.Strings;
 
 import com.github.dockerjava.api.DockerClient;
@@ -76,7 +77,7 @@ public class DockerBuilderControlOptionRun extends DockerBuilderControlCloudOpti
     }
 
     @Override
-    public void execute(AbstractBuild<?, ?> build) throws DockerException, IOException {
+    public void execute(Run<?, ?> build) throws DockerException, IOException {
         DockerClient client = getClient(build);
 
         // Expand some token macros
@@ -106,7 +107,7 @@ public class DockerBuilderControlOptionRun extends DockerBuilderControlCloudOpti
         getLaunchAction(build).started(client, containerId);
     }
 
-    private String expand(AbstractBuild<?, ?> build, String text) {
+    private String expand(Run<?, ?> build, String text) {
         try {
             if (!Strings.isNullOrEmpty(text)) {
                 text = TokenMacro.expandAll((AbstractBuild) build, TaskListener.NULL, text);

@@ -4,6 +4,7 @@ import com.github.dockerjava.api.DockerException;
 import com.nirima.jenkins.plugins.docker.action.DockerLaunchAction;
 import hudson.Extension;
 import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
@@ -20,7 +21,7 @@ public class DockerBuilderControlOptionStopAll extends DockerBuilderControlOptio
     }
 
     @Override
-    public void execute(AbstractBuild<?, ?> build) throws DockerException {
+    public void execute(Run<?, ?> build) throws DockerException {
         LOGGER.info("Stopping all containers");
         for(DockerLaunchAction.Item containerItem : getLaunchAction(build).getRunning()) {
             try {

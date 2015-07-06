@@ -6,6 +6,7 @@ import com.github.dockerjava.api.DockerException;
 import com.nirima.jenkins.plugins.docker.DockerTemplate;
 import hudson.Extension;
 import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import org.kohsuke.stapler.DataBoundConstructor;
 
 /**
@@ -25,7 +26,7 @@ public class DockerBuilderControlOptionProvisionAndStart extends DockerBuilderCo
     }
 
     @Override
-    public void execute(AbstractBuild<?, ?> build) throws DockerException {
+    public void execute(Run<?, ?> build) throws DockerException {
 
         DockerTemplate template = getCloud(build).getTemplate(templateId);
 
