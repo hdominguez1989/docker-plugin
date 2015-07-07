@@ -1,7 +1,7 @@
 package com.nirima.jenkins.plugins.docker.builder;
 
 import hudson.model.Run;
-import shaded.com.google.common.base.Strings;
+import com.google.common.base.Strings;
 
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.api.DockerException;

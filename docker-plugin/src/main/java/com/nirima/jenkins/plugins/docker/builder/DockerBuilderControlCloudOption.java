@@ -1,10 +1,8 @@
 package com.nirima.jenkins.plugins.docker.builder;
 
-import hudson.FilePath;
-import shaded.com.google.common.base.Strings;
+import com.google.common.base.Strings;
 import hudson.model.Run;
 
-import hudson.model.Computer;
 import com.github.dockerjava.api.DockerClient;
 import com.nirima.jenkins.plugins.docker.DockerCloud;
 import com.nirima.jenkins.plugins.docker.DockerSlave;
